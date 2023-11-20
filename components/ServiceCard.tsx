@@ -1,7 +1,9 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const ServiceCard = () => {
+const ServiceCard = (props) => {
+  const { title, price, description, tags } = props;
+
   return (
     <View
       style={{
@@ -18,25 +20,19 @@ const ServiceCard = () => {
         />
 
         <View style={styles.serviceInfo}>
-          <Text style={styles.title}>Cup cake</Text>
+          <Text style={styles.title}>{title}</Text>
 
-          <Text style={styles.price}>$10</Text>
+          <Text style={styles.price}>${price}</Text>
         </View>
 
-        <Text style={styles.description}>
-          A sweet single-serving delight, the cupcake is a mini-cake topped with
-          luscious frosting, bringing joy with its delightful flavors and
-          charming appeal.
-        </Text>
+        <Text style={styles.description}>{description}</Text>
 
         <View style={styles.tags}>
-          {["Cupcakes", "Desserts", "Baking", "CupcakeLovers"].map(
-            (item, index) => (
-              <Text key={index} style={styles.tag}>
-                {item}
-              </Text>
-            )
-          )}
+          {tags?.map((item: any, index: number) => (
+            <Text key={index} style={styles.tag}>
+              {item}
+            </Text>
+          ))}
         </View>
       </View>
 
