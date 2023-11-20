@@ -1,14 +1,50 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
+import { useState, useEffect } from "react";
+import { db, getDocs, collection } from "../../firebase/firebase";
+import ServiceCard from "../../components/ServiceCard";
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+export default function BuyerScreen() {
+  const [services, setServices] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-export default function TabOneScreen() {
+  const getServices = async () => {
+    setIsLoading(true);
+    const servicesArray: any[] = [];
+
+    try {
+      const querySnapshot = await getDocs(collection(db, "services"));
+      querySnapshot.forEach((doc) => {
+        servicesArray.push({ id: doc.id, ...doc.data() });
+      });
+
+      setServices(servicesArray);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getServices();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <FlatList
+        data={services}
+        renderItem={({ item }) => <ServiceCard {...item} />}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ gap: 20, paddingBottom: 50 }}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            colors={["#83A2FF"]}
+            onRefresh={getServices}
+          />
+        }
+      />
     </View>
   );
 }
@@ -16,16 +52,7 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    backgroundColor: "#fff",
+    paddingTop: 50,
   },
 });

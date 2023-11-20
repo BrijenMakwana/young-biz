@@ -7,6 +7,8 @@ const CustomInput = (props) => {
     isMultiline = false,
     inputMode = "text",
     isSecure = false,
+    setValue,
+    value,
   } = props;
 
   return (
@@ -17,6 +19,8 @@ const CustomInput = (props) => {
         multiline={isMultiline}
         inputMode={inputMode}
         secureTextEntry={isSecure}
+        onChangeText={(text) => setValue(text)}
+        value={value}
       />
 
       <View style={styles.shadow} />
