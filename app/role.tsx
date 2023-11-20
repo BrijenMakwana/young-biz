@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import RoleButton from "../components/RoleButton";
+import CustomButton from "../components/CustomButton";
 
 const RoleScreen = () => {
   return (
@@ -8,8 +8,8 @@ const RoleScreen = () => {
       <Text style={styles.heading}>who are you?</Text>
 
       <View style={styles.btnContainer}>
-        <RoleButton text="buyer" backgroundColor="#7df9ff" />
-        <RoleButton text="seller" backgroundColor="#bafca2" />
+        <CustomButton text="seller" backgroundColor="#ff7a5c" />
+        <CustomButton text="buyer" backgroundColor="#bafca2" />
       </View>
     </View>
   );
@@ -21,14 +21,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-evenly",
-    backgroundColor: "#FAF8ED",
+    justifyContent: "center",
+    backgroundColor: "#fff",
   },
   heading: {
-    fontSize: 45,
+    fontSize: 30,
     textTransform: "capitalize",
+    fontFamily: "Neo",
   },
   btnContainer: {
+    marginTop: 60,
+    width: "100%",
+    alignItems: "center",
     gap: 30,
   },
 });

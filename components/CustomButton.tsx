@@ -1,11 +1,15 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { router } from "expo-router";
 
-const RoleButton = (props) => {
+const CustomButton = (props) => {
   const { text, backgroundColor } = props;
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => router.replace("/login")}
+    >
       <View
         style={[
           styles.btn,
@@ -21,12 +25,12 @@ const RoleButton = (props) => {
   );
 };
 
-export default RoleButton;
+export default CustomButton;
 
 const styles = StyleSheet.create({
   container: {
-    height: 65,
-    width: 250,
+    height: 60,
+    width: "80%",
   },
   btn: {
     alignItems: "center",
@@ -40,11 +44,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     textTransform: "uppercase",
-    fontWeight: "600",
+    fontFamily: "Neo",
   },
   shadow: {
     width: "100%",
-    height: 60,
+    height: "100%",
     zIndex: 0,
     backgroundColor: "#000",
     position: "absolute",
