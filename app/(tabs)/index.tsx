@@ -33,7 +33,7 @@ export default function BuyerScreen() {
     <View style={styles.container}>
       <FlatList
         data={services}
-        renderItem={({ item }) => <ServiceCard {...item} />}
+        renderItem={({ item }) => <ServiceCard {...item} forBuyer />}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ gap: 20, paddingBottom: 50 }}
         showsVerticalScrollIndicator={false}

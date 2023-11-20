@@ -1,15 +1,21 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { router } from "expo-router";
 
 const ServiceCard = (props) => {
-  const { title, price, description, tags } = props;
+  const { id, title, price, description, tags, forBuyer = false } = props;
+
+  const goToServiceScreen = () => {
+    router.push(`/service/${id}`);
+  };
 
   return (
-    <View
+    <Pressable
       style={{
         width: "92%",
         alignSelf: "center",
       }}
+      onPress={forBuyer ? goToServiceScreen : undefined}
     >
       <View style={styles.container}>
         <Image
@@ -37,7 +43,7 @@ const ServiceCard = (props) => {
       </View>
 
       <View style={styles.shadow} />
-    </View>
+    </Pressable>
   );
 };
 
@@ -93,7 +99,6 @@ const styles = StyleSheet.create({
     textTransform: "lowercase",
     borderWidth: 1,
   },
-
   shadow: {
     width: "100%",
     height: "100%",
