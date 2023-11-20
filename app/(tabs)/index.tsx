@@ -35,7 +35,11 @@ export default function BuyerScreen() {
         data={services}
         renderItem={({ item }) => <ServiceCard {...item} forBuyer />}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ gap: 20, paddingBottom: 50 }}
+        contentContainerStyle={{
+          gap: 20,
+          paddingBottom: 50,
+          paddingHorizontal: 15,
+        }}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl

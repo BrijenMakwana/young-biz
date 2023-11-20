@@ -13,6 +13,7 @@ import {
   getDoc,
   setDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -42,4 +43,5 @@ export {
   doc,
   signInWithEmailAndPassword,
   signOut,
+  deleteDoc,
 };
