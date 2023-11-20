@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     flex: 1,
+    gap: 3,
   },
   username: {
     fontSize: 17,
@@ -41,5 +42,6 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 11,
     fontFamily: "Neo",
+    color: "#fff",
   },
 });
