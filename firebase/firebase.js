@@ -1,8 +1,16 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.EXPO_PUBLIC_API_KEY,
   authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
   projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
   storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
@@ -12,6 +20,17 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+const auth = getAuth(app);
+
 const db = getFirestore(app);
 
-export { db, collection, addDoc, getDocs };
+export {
+  db,
+  collection,
+  addDoc,
+  getDocs,
+  auth,
+  createUserWithEmailAndPassword,
+  setDoc,
+  doc,
+};
