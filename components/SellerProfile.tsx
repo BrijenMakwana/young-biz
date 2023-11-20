@@ -1,16 +1,30 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import SellerProfileModal from "./SellerProfileModal";
+import { useState } from "react";
 
 const SellerProfile = () => {
-  return (
-    <View style={styles.container}>
-      <FontAwesome name="user" size={30} color="black" />
+  const [sellerProfileIsOpen, setSellerProfileIsOpen] = useState(false);
 
-      <View style={styles.userInfo}>
-        <Text style={styles.username}>brijen makwana</Text>
-        <Text style={styles.email}>@brijenma@gmail.com</Text>
-      </View>
-    </View>
+  return (
+    <>
+      <Pressable
+        style={styles.container}
+        onPress={() => setSellerProfileIsOpen(true)}
+      >
+        <FontAwesome name="user" size={30} color="black" />
+
+        <View style={styles.userInfo}>
+          <Text style={styles.username}>brijen makwana</Text>
+          <Text style={styles.email}>@brijenma@gmail.com</Text>
+        </View>
+      </Pressable>
+
+      <SellerProfileModal
+        isOpen={sellerProfileIsOpen}
+        onClose={() => setSellerProfileIsOpen(false)}
+      />
+    </>
   );
 };
 
