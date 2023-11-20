@@ -1,4 +1,11 @@
-import { StyleSheet, Text, Image, View, Linking } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Linking,
+  ActivityIndicator,
+} from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { db, doc, getDoc } from "../../firebase/firebase";
@@ -15,7 +22,11 @@ const ServiceScreen = () => {
   const [service, setService] = useState({});
   const [seller, setSeller] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const getService = async () => {
+    setIsLoading(true);
+
     if (id) {
       const docRef = doc(db, "services", id);
       const docSnap = await getDoc(docRef);
@@ -24,6 +35,8 @@ const ServiceScreen = () => {
         setService(docSnap.data());
       }
     }
+
+    setIsLoading(false);
   };
 
   const getSellerInfo = async () => {
@@ -48,6 +61,17 @@ const ServiceScreen = () => {
   useEffect(() => {
     getSellerInfo();
   }, [service]);
+
+  if (isLoading)
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#83A2FF"
+        style={{
+          marginTop: 50,
+        }}
+      />
+    );
 
   return (
     <ScrollView
