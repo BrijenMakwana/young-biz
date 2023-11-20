@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 import SellerProfile from "../components/SellerProfile";
 import ServiceCard from "../components/ServiceCard";
 import FAB from "../components/FAB";
-import { db, collection, getDocs } from "../firebase/firebase";
+import { auth, db, collection, getDocs } from "../firebase/firebase";
 
 const SellerScreen = () => {
   const [services, setServices] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [userID, setUserID] = useState<string | undefined>("");
 
   const getServices = async () => {
     setIsLoading(true);
@@ -33,6 +35,7 @@ const SellerScreen = () => {
   };
 
   useEffect(() => {
+    setUserID(auth.currentUser?.uid);
     getServices();
   }, []);
 
@@ -42,7 +45,7 @@ const SellerScreen = () => {
         <SellerProfile />
 
         <FlatList
-          data={services}
+          data={services.filter((item: any) => item.userID === userID)}
           renderItem={({ item }) => <ServiceCard {...item} />}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ gap: 20, paddingBottom: 120 }}

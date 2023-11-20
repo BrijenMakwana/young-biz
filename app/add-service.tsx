@@ -10,7 +10,7 @@ import CustomInput from "../components/CustomInput";
 import { RadioButton } from "react-native-paper";
 import { useState } from "react";
 import CustomButton from "../components/CustomButton";
-import { db, collection, addDoc } from "../firebase/firebase";
+import { auth, db, collection, addDoc } from "../firebase/firebase";
 import { router } from "expo-router";
 
 const AddService = () => {
@@ -26,12 +26,13 @@ const AddService = () => {
     setIsLoading(true);
 
     try {
-      const docRef = await addDoc(collection(db, "services"), {
+      await addDoc(collection(db, "services"), {
         title: title,
         description: description,
         price: price,
         tags: tags.split(","),
         buyingMode: buyingMode,
+        userID: auth.currentUser?.uid,
       });
 
       ToastAndroid.show("Service Added successfully!", ToastAndroid.SHORT);
