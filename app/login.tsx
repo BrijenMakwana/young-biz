@@ -10,16 +10,20 @@ const Login = () => {
       <Text style={styles.heading}>login</Text>
 
       <View style={styles.loginContainer}>
-        <CustomInput />
-        <CustomInput />
+        <CustomInput placeholderText="Email" />
+        <CustomInput placeholderText="Password" isSecure />
 
-        <CustomButton text="login" backgroundColor="#ff7a5c" />
+        <CustomButton
+          text="login"
+          backgroundColor="#83A2FF"
+          onPress={() => router.push("/seller")}
+        />
 
         <Text style={styles.newhere}>
           New here?{" "}
           <Text
             style={{
-              color: "#ff7a5c",
+              color: "#83A2FF",
               textDecorationLine: "underline",
             }}
             onPress={() => router.push("/register")}
@@ -44,11 +48,10 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 40,
     textTransform: "uppercase",
-    color: "#ff7a5c",
     fontFamily: "Neo",
   },
   loginContainer: {
-    marginTop: 70,
+    marginTop: 50,
     gap: 30,
     width: "100%",
     alignItems: "center",

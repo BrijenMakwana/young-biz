@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import CustomButton from "../components/CustomButton";
+import { router } from "expo-router";
 
 const RoleScreen = () => {
   return (
@@ -8,8 +9,12 @@ const RoleScreen = () => {
       <Text style={styles.heading}>who are you?</Text>
 
       <View style={styles.btnContainer}>
-        <CustomButton text="seller" backgroundColor="#ff7a5c" />
-        <CustomButton text="buyer" backgroundColor="#bafca2" />
+        <CustomButton
+          text="seller"
+          backgroundColor="#83A2FF"
+          onPress={() => router.push("/login")}
+        />
+        <CustomButton text="buyer" backgroundColor="#83A2FF" />
       </View>
     </View>
   );
