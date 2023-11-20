@@ -26,7 +26,7 @@ export default CustomButton;
 const styles = StyleSheet.create({
   container: {
     height: 60,
-    width: "80%",
+    width: "100%",
   },
   btn: {
     alignItems: "center",

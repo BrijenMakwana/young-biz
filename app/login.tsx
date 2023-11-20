@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     gap: 30,
     width: "100%",
+    paddingHorizontal: 30,
     alignItems: "center",
   },
   newhere: {
