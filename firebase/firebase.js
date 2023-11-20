@@ -3,12 +3,14 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
+  getDoc,
   setDoc,
   doc,
 } from "firebase/firestore";
@@ -33,9 +35,11 @@ export {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   auth,
   createUserWithEmailAndPassword,
   setDoc,
   doc,
   signInWithEmailAndPassword,
+  signOut,
 };
