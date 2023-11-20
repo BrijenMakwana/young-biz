@@ -1,11 +1,48 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  ToastAndroid,
+} from "react-native";
 import CustomInput from "../components/CustomInput";
 import { RadioButton } from "react-native-paper";
 import { useState } from "react";
 import CustomButton from "../components/CustomButton";
+import { db, collection, addDoc } from "../firebase/firebase";
+import { router } from "expo-router";
 
 const AddService = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [tags, setTags] = useState("");
   const [buyingMode, setBuyingMode] = useState("pickup");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const addServiceToFirestore = async () => {
+    setIsLoading(true);
+
+    try {
+      const docRef = await addDoc(collection(db, "services"), {
+        title: title,
+        description: description,
+        price: price,
+        tags: tags.split(","),
+        buyingMode: buyingMode,
+      });
+
+      ToastAndroid.show("Service Added successfully!", ToastAndroid.SHORT);
+
+      router.back();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -16,10 +53,28 @@ const AddService = () => {
         <Text style={styles.heading}>add service</Text>
 
         <View style={styles.inputs}>
-          <CustomInput placeholderText="Title" />
-          <CustomInput placeholderText="Description" isMultiline />
-          <CustomInput placeholderText="Price" inputMode="numeric" />
-          <CustomInput placeholderText="Comma Separated Tags" />
+          <CustomInput
+            placeholderText="Title"
+            setValue={setTitle}
+            value={title}
+          />
+          <CustomInput
+            placeholderText="Description"
+            isMultiline
+            setValue={setDescription}
+            value={description}
+          />
+          <CustomInput
+            placeholderText="Price"
+            inputMode="numeric"
+            setValue={setPrice}
+            value={price.toString()}
+          />
+          <CustomInput
+            placeholderText="Comma Separated Tags"
+            setValue={setTags}
+            value={tags}
+          />
 
           <RadioButton.Group
             onValueChange={(newValue) => setBuyingMode(newValue)}
@@ -53,7 +108,15 @@ const AddService = () => {
           zIndex: 10,
         }}
       >
-        <CustomButton text="add" backgroundColor="#83A2FF" />
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#83A2FF" />
+        ) : (
+          <CustomButton
+            text="add"
+            backgroundColor="#83A2FF"
+            onPress={addServiceToFirestore}
+          />
+        )}
       </View>
     </>
   );

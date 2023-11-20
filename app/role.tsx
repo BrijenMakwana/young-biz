@@ -14,7 +14,11 @@ const RoleScreen = () => {
           backgroundColor="#83A2FF"
           onPress={() => router.push("/login")}
         />
-        <CustomButton text="buyer" backgroundColor="#83A2FF" />
+        <CustomButton
+          text="buyer"
+          backgroundColor="#83A2FF"
+          onPress={() => router.push("/(tabs)")}
+        />
       </View>
     </View>
   );
@@ -38,6 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
     width: "100%",
     alignItems: "center",
+    paddingHorizontal: 30,
     gap: 30,
   },
 });
