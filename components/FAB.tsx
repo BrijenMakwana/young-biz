@@ -1,9 +1,13 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const FAB = () => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => router.push("/add-service")}
+    >
       <View style={styles.btn}>
         <Entypo name="plus" size={35} color="#000" />
       </View>
