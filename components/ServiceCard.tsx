@@ -12,7 +12,7 @@ const ServiceCard = (props) => {
   return (
     <Pressable
       style={{
-        width: "92%",
+        width: "100%",
         alignSelf: "center",
       }}
       onPress={forBuyer ? goToServiceScreen : undefined}

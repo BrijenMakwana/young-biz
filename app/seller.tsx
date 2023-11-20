@@ -3,12 +3,20 @@ import {
   SafeAreaView,
   FlatList,
   RefreshControl,
+  ToastAndroid,
 } from "react-native";
 import { useEffect, useState } from "react";
 import SellerProfile from "../components/SellerProfile";
-import ServiceCard from "../components/ServiceCard";
 import FAB from "../components/FAB";
-import { auth, db, collection, getDocs } from "../firebase/firebase";
+import {
+  auth,
+  db,
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "../firebase/firebase";
+import SellerServiceCard from "../components/SellerServiceCard";
 
 const SellerScreen = () => {
   const [services, setServices] = useState<any>([]);
@@ -34,6 +42,18 @@ const SellerScreen = () => {
     }
   };
 
+  const deleteService = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, "services", id));
+
+      ToastAndroid.show("Deleted!", ToastAndroid.SHORT);
+
+      getServices();
+    } catch (error) {
+      ToastAndroid.show("Try Again!", ToastAndroid.SHORT);
+    }
+  };
+
   useEffect(() => {
     setUserID(auth.currentUser?.uid);
     getServices();
@@ -46,9 +66,15 @@ const SellerScreen = () => {
 
         <FlatList
           data={services.filter((item: any) => item.userID === userID)}
-          renderItem={({ item }) => <ServiceCard {...item} />}
+          renderItem={({ item }) => (
+            <SellerServiceCard {...item} deleteService={deleteService} />
+          )}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ gap: 20, paddingBottom: 120 }}
+          contentContainerStyle={{
+            gap: 20,
+            paddingBottom: 120,
+            paddingHorizontal: 15,
+          }}
           style={{
             marginTop: 15,
           }}
