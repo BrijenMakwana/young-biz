@@ -1,10 +1,23 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import React from "react";
 
-const CustomInput = () => {
+const CustomInput = (props) => {
+  const {
+    placeholderText,
+    isMultiline = false,
+    inputMode = "text",
+    isSecure = false,
+  } = props;
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Email" />
+      <TextInput
+        style={styles.input}
+        placeholder={placeholderText}
+        multiline={isMultiline}
+        inputMode={inputMode}
+        secureTextEntry={isSecure}
+      />
 
       <View style={styles.shadow} />
     </View>
