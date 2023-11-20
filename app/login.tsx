@@ -13,7 +13,11 @@ const Login = () => {
         <CustomInput placeholderText="Email" />
         <CustomInput placeholderText="Password" isSecure />
 
-        <CustomButton text="login" backgroundColor="#83A2FF" />
+        <CustomButton
+          text="login"
+          backgroundColor="#83A2FF"
+          onPress={() => router.push("/seller")}
+        />
 
         <Text style={styles.newhere}>
           New here?{" "}

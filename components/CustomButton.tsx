@@ -1,15 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { router } from "expo-router";
 
 const CustomButton = (props) => {
-  const { text, backgroundColor } = props;
+  const { text, backgroundColor, onPress } = props;
 
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => router.replace("/login")}
-    >
+    <Pressable style={styles.container} onPress={onPress}>
       <View
         style={[
           styles.btn,
