@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     position: "absolute",
     borderRadius: 10,
-    top: 5,
-    left: 5,
+    top: 4,
+    left: 4,
   },
 });
