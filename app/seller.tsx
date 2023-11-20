@@ -2,14 +2,20 @@ import { StyleSheet, Text, SafeAreaView } from "react-native";
 import React from "react";
 import SellerProfile from "../components/SellerProfile";
 import ServiceCard from "../components/ServiceCard";
+import FAB from "../components/FAB";
 
 const SellerScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <SellerProfile />
+    <>
+      <SafeAreaView style={styles.container}>
+        <SellerProfile />
 
-      <ServiceCard />
-    </SafeAreaView>
+        <ServiceCard />
+        <ServiceCard />
+      </SafeAreaView>
+
+      <FAB />
+    </>
   );
 };
 
