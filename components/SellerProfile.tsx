@@ -1,10 +1,32 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import SellerProfileModal from "./SellerProfileModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { auth, db, getDoc, doc } from "../firebase/firebase";
 
 const SellerProfile = () => {
+  const [user, setUser] = useState({});
+
   const [sellerProfileIsOpen, setSellerProfileIsOpen] = useState(false);
+
+  const getUserInfo = async () => {
+    const user = auth.currentUser;
+
+    const userID = user?.uid;
+
+    if (userID) {
+      const docRef = doc(db, "users", userID);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUser(docSnap.data());
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <>
@@ -15,14 +37,15 @@ const SellerProfile = () => {
         <FontAwesome name="user" size={30} color="black" />
 
         <View style={styles.userInfo}>
-          <Text style={styles.username}>brijen makwana</Text>
-          <Text style={styles.email}>@brijenma@gmail.com</Text>
+          <Text style={styles.username}>{user?.fullName}</Text>
+          <Text style={styles.email}>@{user?.email}</Text>
         </View>
       </Pressable>
 
       <SellerProfileModal
         isOpen={sellerProfileIsOpen}
         onClose={() => setSellerProfileIsOpen(false)}
+        {...user}
       />
     </>
   );
