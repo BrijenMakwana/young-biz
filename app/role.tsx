@@ -21,7 +21,7 @@ const RoleScreen = () => {
         />
         <CustomButton
           text="explorer"
-          backgroundColor="#83A2FF"
+          backgroundColor="#bafca2"
           onPress={() => router.push("/(tabs)")}
         />
       </View>
