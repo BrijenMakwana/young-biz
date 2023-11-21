@@ -1,23 +1,12 @@
 import { StyleSheet, View, Modal } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { useState } from "react";
 import CurrentLocationFAB from "./CurrentLocationFAB";
 
-const initialRegion = {
-  latitude: 12.9716,
-  longitude: 77.5946,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
-};
-
 const MapModal = (props) => {
-  const { isOpen, onClose } = props;
-
-  const [mapRegion, setMapRegion] = useState(initialRegion);
+  const { isOpen, onClose, mapRegion, setMapRegion } = props;
 
   const changeMapRegion = (region) => {
     setMapRegion(region);
-    console.log(mapRegion);
   };
 
   return (
@@ -33,7 +22,7 @@ const MapModal = (props) => {
         </MapView>
       </View>
 
-      <CurrentLocationFAB />
+      <CurrentLocationFAB changeMapRegion={changeMapRegion} />
     </Modal>
   );
 };
