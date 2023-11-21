@@ -62,9 +62,7 @@ const SellersMapView = () => {
             key={item.id}
             image={require("../assets/images/kid.png")}
           >
-            <Callout>
-              <SellerMarkerCard {...item} />
-            </Callout>
+            <SellerMarkerCard {...item} />
           </Marker>
         ))}
       </MapView>
