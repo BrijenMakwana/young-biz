@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
+import { StyleSheet, View, FlatList, RefreshControl, Text } from "react-native";
 import { useState, useEffect } from "react";
 import { db, getDocs, collection } from "../../firebase/firebase";
 import ServiceCard from "../../components/ServiceCard";
@@ -33,6 +33,8 @@ export default function BuyerScreen() {
   return (
     <>
       <View style={styles.container}>
+        <Text style={styles.heading}>explore</Text>
+
         <FlatList
           data={services}
           renderItem={({ item }) => <ServiceCard {...item} forBuyer />}
@@ -41,6 +43,7 @@ export default function BuyerScreen() {
             gap: 20,
             paddingBottom: 50,
             paddingHorizontal: 15,
+            marginTop: 20,
           }}
           showsVerticalScrollIndicator={false}
           refreshControl={
@@ -63,5 +66,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: 50,
+  },
+  heading: {
+    fontSize: 15,
+    fontFamily: "Neo",
+    textTransform: "uppercase",
+    marginLeft: 15,
   },
 });
