@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import CustomButton from "../components/CustomButton";
 import { router } from "expo-router";
@@ -6,6 +6,11 @@ import { router } from "expo-router";
 const RoleScreen = () => {
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../assets/images/logo.png")}
+        style={{ width: 300, height: 100 }}
+        resizeMode="contain"
+      />
       <Text style={styles.heading}>who are you?</Text>
 
       <View style={styles.btnContainer}>
@@ -30,13 +35,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#fff",
+    paddingTop: 60,
   },
   heading: {
     fontSize: 30,
     textTransform: "capitalize",
     fontFamily: "Neo",
+    marginTop: 100,
   },
   btnContainer: {
     marginTop: 60,
