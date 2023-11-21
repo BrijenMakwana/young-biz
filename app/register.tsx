@@ -16,6 +16,7 @@ import {
 } from "../firebase/firebase";
 import { useState } from "react";
 import { router } from "expo-router";
+import MapModal from "../components/MapModal";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -25,6 +26,8 @@ const Register = () => {
   const [bio, setBio] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+
+  const [mapModalIsOpen, setMapModalIsopen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -114,6 +117,8 @@ const Register = () => {
           />
         )}
       </View>
+
+      <MapModal isOpen={true} onClose={() => setMapModalIsopen(false)} />
     </View>
   );
 };
