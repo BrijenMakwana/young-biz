@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 40,
+    paddingTop: 60,
     paddingBottom: 150,
   },
   heading: {
