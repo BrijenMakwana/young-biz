@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import SellerProfileModal from "./SellerProfileModal";
 import { useEffect, useState } from "react";
@@ -33,8 +33,14 @@ const SellerProfile = () => {
       <Pressable
         style={styles.container}
         onPress={() => setSellerProfileIsOpen(true)}
+        android_ripple={{
+          color: "#83A2FF",
+        }}
       >
-        <FontAwesome name="user" size={30} color="black" />
+        <Image
+          source={require("../assets/images/kid.png")}
+          style={styles.image}
+        />
 
         <View style={styles.userInfo}>
           <Text style={styles.username}>{user?.fullName}</Text>
@@ -55,30 +61,29 @@ export default SellerProfile;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#83A2FF",
-    width: "92%",
-    alignSelf: "center",
-    padding: 15,
-    borderRadius: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 20,
-    borderWidth: 2,
-    borderColor: "#000",
   },
   userInfo: {
     flex: 1,
     gap: 3,
   },
+  image: {
+    height: 45,
+    width: 45,
+  },
   username: {
-    fontSize: 17,
+    fontSize: 18,
     fontFamily: "Neo",
     textTransform: "uppercase",
+    color: "#83A2FF",
   },
   email: {
     fontSize: 11,
     fontFamily: "Neo",
-    color: "#fff",
   },
 });

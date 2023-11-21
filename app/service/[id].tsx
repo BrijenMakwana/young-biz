@@ -17,7 +17,7 @@ const BuyingMode = (props) => {
   const { text } = props;
 
   const texts = {
-    delivery: "delivery ony",
+    delivery: "delivery only",
     pickup: "pickup only",
     both: "delivery / pickup",
   };
@@ -122,7 +122,7 @@ const ServiceScreen = () => {
 
       <Image
         source={{
-          uri: "https://images.unsplash.com/photo-1607478900766-efe13248b125?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          uri: service?.image,
         }}
         style={styles.image}
       />
