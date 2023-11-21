@@ -41,7 +41,7 @@ export default function BuyerScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={{
             gap: 20,
-            paddingBottom: 50,
+            paddingBottom: 140,
             paddingHorizontal: 15,
             marginTop: 20,
           }}
