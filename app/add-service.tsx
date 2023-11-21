@@ -8,9 +8,16 @@ import {
 } from "react-native";
 import CustomInput from "../components/CustomInput";
 import { RadioButton } from "react-native-paper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomButton from "../components/CustomButton";
-import { auth, db, collection, addDoc } from "../firebase/firebase";
+import {
+  auth,
+  db,
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+} from "../firebase/firebase";
 import { router } from "expo-router";
 
 const AddService = () => {
@@ -20,7 +27,28 @@ const AddService = () => {
   const [tags, setTags] = useState("");
   const [buyingMode, setBuyingMode] = useState("pickup");
 
+  const [location, setLocation] = useState({});
+
   const [isLoading, setIsLoading] = useState(false);
+
+  const getUserInfo = async () => {
+    const user = auth.currentUser;
+
+    const userID = user?.uid;
+
+    if (userID) {
+      const docRef = doc(db, "users", userID);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setLocation(docSnap.data().location);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   const addServiceToFirestore = async () => {
     setIsLoading(true);
@@ -33,6 +61,7 @@ const AddService = () => {
         tags: tags.split(","),
         buyingMode: buyingMode,
         userID: auth.currentUser?.uid,
+        location: location,
       });
 
       ToastAndroid.show("Service Added successfully!", ToastAndroid.SHORT);
