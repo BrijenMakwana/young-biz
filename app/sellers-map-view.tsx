@@ -1,6 +1,6 @@
 import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { useState, useEffect } from "react";
-import MapView, { Marker, Callout } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { db, getDocs, collection } from "../firebase/firebase";
 import SellerMarkerCard from "../components/SellerMarkerCard";
 
@@ -51,6 +51,8 @@ const SellersMapView = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>bright kids around you!</Text>
+
       <MapView
         style={styles.map}
         initialRegion={initialRegion}
@@ -76,6 +78,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  heading: {
+    fontSize: 15,
+    fontFamily: "Neo",
+    textTransform: "uppercase",
+    backgroundColor: "#83A2FF",
+    paddingTop: 50,
+    paddingBottom: 10,
+    textAlign: "center",
   },
   map: {
     width: "100%",
