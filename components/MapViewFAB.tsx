@@ -7,7 +7,7 @@ const MapViewFAB = () => {
   return (
     <Pressable
       style={styles.container}
-      onPress={() => router.push("/service-map-view")}
+      onPress={() => router.push("/sellers-map-view")}
     >
       <View style={styles.btn}>
         <Fontisto name="map" size={25} color="#000" />
