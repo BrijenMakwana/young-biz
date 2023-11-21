@@ -1,15 +1,18 @@
+import { router } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Callout } from "react-native-maps";
 
 const SellerMarkerCard = (props) => {
-  const { fullName, bio } = props;
+  const { id, fullName, bio } = props;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.fullName}>{fullName}</Text>
+    <Callout onPress={() => router.push(`/seller-info/${id}`)}>
+      <View style={styles.container}>
+        <Text style={styles.fullName}>{fullName}</Text>
 
-      <Text style={styles.bio}>{bio}</Text>
-    </View>
+        <Text style={styles.bio}>{bio}</Text>
+      </View>
+    </Callout>
   );
 };
 
