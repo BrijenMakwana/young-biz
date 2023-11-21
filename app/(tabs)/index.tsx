@@ -33,7 +33,7 @@ export default function BuyerScreen() {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.heading}>explore</Text>
+        <Text style={styles.heading}>around you!</Text>
 
         <FlatList
           data={services}
