@@ -4,6 +4,7 @@ import {
   View,
   ActivityIndicator,
   ToastAndroid,
+  Pressable,
 } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -17,6 +18,14 @@ import {
 import { useState } from "react";
 import { router } from "expo-router";
 import MapModal from "../components/MapModal";
+import { Fontisto } from "@expo/vector-icons";
+
+const initialRegion = {
+  latitude: 12.9716,
+  longitude: 77.5946,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+};
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +38,8 @@ const Register = () => {
 
   const [mapModalIsOpen, setMapModalIsopen] = useState(false);
 
+  const [mapRegion, setMapRegion] = useState(initialRegion);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const addUserToFirestore = async (userID: string) => {
@@ -40,6 +51,10 @@ const Register = () => {
         bio,
         address,
         phone,
+        location: {
+          latitude: mapRegion.latitude,
+          longitude: mapRegion.longitude,
+        },
       });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -95,17 +110,19 @@ const Register = () => {
           value={bio}
         />
         <CustomInput
-          placeholderText="Address"
-          isMultiline
-          setValue={setAddress}
-          value={address}
-        />
-        <CustomInput
           placeholderText="Guardian Phone Number"
           inputMode="tel"
           setValue={setPhone}
           value={phone.toString()}
         />
+
+        <Pressable
+          onPress={() => setMapModalIsopen(true)}
+          style={styles.locationBtn}
+        >
+          <Fontisto name="map" size={20} color="#000" />
+          <Text style={styles.location}>add location</Text>
+        </Pressable>
 
         {isLoading ? (
           <ActivityIndicator size="large" color="#83A2FF" />
@@ -118,7 +135,12 @@ const Register = () => {
         )}
       </View>
 
-      <MapModal isOpen={true} onClose={() => setMapModalIsopen(false)} />
+      <MapModal
+        isOpen={mapModalIsOpen}
+        onClose={() => setMapModalIsopen(false)}
+        mapRegion={mapRegion}
+        setMapRegion={setMapRegion}
+      />
     </View>
   );
 };
@@ -143,5 +165,16 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 30,
+  },
+  locationBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
+  },
+  location: {
+    fontSize: 15,
+    fontFamily: "Neo",
+    textTransform: "capitalize",
+    color: "#83A2FF",
   },
 });
