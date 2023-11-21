@@ -20,6 +20,7 @@ import { useState } from "react";
 import { router } from "expo-router";
 import MapModal from "../components/MapModal";
 import { Fontisto } from "@expo/vector-icons";
+import DisplayLocation from "../components/DisplayLocation";
 
 const initialRegion = {
   latitude: 12.9716,
@@ -40,6 +41,8 @@ const Register = () => {
   const [mapModalIsOpen, setMapModalIsopen] = useState(false);
 
   const [mapRegion, setMapRegion] = useState(initialRegion);
+
+  const [currentLocationIsAdded, setCurrentLocationIsAdded] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -127,6 +130,8 @@ const Register = () => {
             value={address}
           />
 
+          {currentLocationIsAdded && <DisplayLocation location={mapRegion} />}
+
           <Pressable
             onPress={() => setMapModalIsopen(true)}
             style={styles.locationBtn}
@@ -141,6 +146,8 @@ const Register = () => {
           onClose={() => setMapModalIsopen(false)}
           mapRegion={mapRegion}
           setMapRegion={setMapRegion}
+          setCurrentLocationIsAdded={setCurrentLocationIsAdded}
+          currentLocationIsAdded={currentLocationIsAdded}
         />
       </ScrollView>
 
