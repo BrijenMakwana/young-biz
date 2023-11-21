@@ -1,7 +1,8 @@
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { useState, useEffect } from "react";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 import { db, getDocs, collection } from "../firebase/firebase";
+import SellerMarkerCard from "../components/SellerMarkerCard";
 
 const initialRegion = {
   latitude: 12.9716,
@@ -60,7 +61,11 @@ const SellersMapView = () => {
             coordinate={item.location}
             key={item.id}
             image={require("../assets/images/kid.png")}
-          />
+          >
+            <Callout>
+              <SellerMarkerCard {...item} />
+            </Callout>
+          </Marker>
         ))}
       </MapView>
     </View>
