@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   ToastAndroid,
   Pressable,
+  ScrollView,
 } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
@@ -19,6 +20,7 @@ import { useState } from "react";
 import { router } from "expo-router";
 import MapModal from "../components/MapModal";
 import { Fontisto } from "@expo/vector-icons";
+import DisplayLocation from "../components/DisplayLocation";
 
 const initialRegion = {
   latitude: 12.9716,
@@ -40,6 +42,8 @@ const Register = () => {
 
   const [mapRegion, setMapRegion] = useState(initialRegion);
 
+  const [currentLocationIsAdded, setCurrentLocationIsAdded] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const addUserToFirestore = async (userID: string) => {
@@ -54,6 +58,7 @@ const Register = () => {
           latitude: mapRegion.latitude,
           longitude: mapRegion.longitude,
         },
+        address,
       });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -81,48 +86,81 @@ const Register = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>register</Text>
+    <>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        style={{ flex: 1, backgroundColor: "#fff" }}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.heading}>register</Text>
 
-      <View style={styles.inputs}>
-        <CustomInput
-          placeholderText="Full Name"
-          setValue={setFullName}
-          value={fullName}
-        />
-        <CustomInput
-          placeholderText="Email"
-          inputMode="email"
-          setValue={setEmail}
-          value={email}
-        />
-        <CustomInput
-          placeholderText="Password"
-          isSecure
-          setValue={setPassword}
-          value={password}
-        />
-        <CustomInput
-          placeholderText="Bio"
-          isMultiline
-          setValue={setBio}
-          value={bio}
-        />
-        <CustomInput
-          placeholderText="Guardian Phone Number"
-          inputMode="tel"
-          setValue={setPhone}
-          value={phone.toString()}
-        />
+        <View style={styles.inputs}>
+          <CustomInput
+            placeholderText="Full Name"
+            setValue={setFullName}
+            value={fullName}
+          />
+          <CustomInput
+            placeholderText="Email"
+            inputMode="email"
+            setValue={setEmail}
+            value={email}
+          />
+          <CustomInput
+            placeholderText="Password"
+            isSecure
+            setValue={setPassword}
+            value={password}
+          />
+          <CustomInput
+            placeholderText="Bio"
+            isMultiline
+            setValue={setBio}
+            value={bio}
+          />
+          <CustomInput
+            placeholderText="Guardian Phone Number"
+            inputMode="tel"
+            setValue={setPhone}
+            value={phone.toString()}
+          />
+          <CustomInput
+            placeholderText="Address"
+            setValue={setAddress}
+            value={address}
+          />
 
-        <Pressable
-          onPress={() => setMapModalIsopen(true)}
-          style={styles.locationBtn}
-        >
-          <Fontisto name="map" size={20} color="#000" />
-          <Text style={styles.location}>add location</Text>
-        </Pressable>
+          {currentLocationIsAdded && <DisplayLocation location={mapRegion} />}
 
+          <Pressable
+            onPress={() => setMapModalIsopen(true)}
+            style={styles.locationBtn}
+          >
+            <Fontisto name="map" size={20} color="#000" />
+            <Text style={styles.location}>add location</Text>
+          </Pressable>
+        </View>
+
+        <MapModal
+          isOpen={mapModalIsOpen}
+          onClose={() => setMapModalIsopen(false)}
+          mapRegion={mapRegion}
+          setMapRegion={setMapRegion}
+          setCurrentLocationIsAdded={setCurrentLocationIsAdded}
+          currentLocationIsAdded={currentLocationIsAdded}
+        />
+      </ScrollView>
+
+      <View
+        style={{
+          position: "absolute",
+          width: "100%",
+          alignItems: "center",
+          bottom: 20,
+          paddingHorizontal: 30,
+          zIndex: 10,
+        }}
+      >
         {isLoading ? (
           <ActivityIndicator size="large" color="#83A2FF" />
         ) : (
@@ -133,14 +171,7 @@ const Register = () => {
           />
         )}
       </View>
-
-      <MapModal
-        isOpen={mapModalIsOpen}
-        onClose={() => setMapModalIsopen(false)}
-        mapRegion={mapRegion}
-        setMapRegion={setMapRegion}
-      />
-    </View>
+    </>
   );
 };
 
@@ -148,10 +179,10 @@ export default Register;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#fff",
+    paddingTop: 40,
+    paddingBottom: 150,
   },
   heading: {
     fontSize: 40,
@@ -159,7 +190,7 @@ const styles = StyleSheet.create({
     fontFamily: "Neo",
   },
   inputs: {
-    marginTop: 50,
+    marginTop: 30,
     gap: 30,
     width: "100%",
     alignItems: "center",

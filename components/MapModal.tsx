@@ -3,10 +3,23 @@ import MapView, { Marker } from "react-native-maps";
 import CurrentLocationFAB from "./CurrentLocationFAB";
 
 const MapModal = (props) => {
-  const { isOpen, onClose, mapRegion, setMapRegion } = props;
+  const {
+    isOpen,
+    onClose,
+    mapRegion,
+    setMapRegion,
+    setCurrentLocationIsAdded,
+    currentLocationIsAdded,
+  } = props;
 
   const changeMapRegion = (region) => {
     setMapRegion(region);
+
+    if (currentLocationIsAdded) {
+      return;
+    }
+
+    setCurrentLocationIsAdded(true);
   };
 
   return (

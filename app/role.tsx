@@ -15,7 +15,7 @@ const RoleScreen = () => {
           onPress={() => router.push("/login")}
         />
         <CustomButton
-          text="buyer"
+          text="explorer"
           backgroundColor="#83A2FF"
           onPress={() => router.push("/(tabs)")}
         />
