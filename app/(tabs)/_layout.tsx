@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Pressable, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 import { Foundation, Fontisto } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 
@@ -23,7 +23,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="search"
         options={{
           title: "Search",
           tabBarIcon: ({ color }) => (
