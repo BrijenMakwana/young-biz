@@ -3,7 +3,15 @@ import React from "react";
 import { router } from "expo-router";
 
 const ServiceCard = (props) => {
-  const { id, title, price, description, tags, forBuyer = false } = props;
+  const {
+    id,
+    title,
+    price,
+    description,
+    image,
+    tags,
+    forBuyer = false,
+  } = props;
 
   const goToServiceScreen = () => {
     router.push(`/service/${id}`);
@@ -20,7 +28,7 @@ const ServiceCard = (props) => {
       <View style={styles.container}>
         <Image
           source={{
-            uri: "https://images.unsplash.com/photo-1607478900766-efe13248b125?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            uri: image,
           }}
           style={styles.image}
         />

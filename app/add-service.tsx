@@ -26,6 +26,7 @@ const AddService = () => {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState("");
   const [buyingMode, setBuyingMode] = useState("pickup");
+  const [serviceImage, setServiceImage] = useState("");
 
   const [location, setLocation] = useState({});
 
@@ -58,6 +59,7 @@ const AddService = () => {
         title: title,
         description: description,
         price: price,
+        image: serviceImage,
         tags: tags.split(","),
         buyingMode: buyingMode,
         userID: auth.currentUser?.uid,
@@ -99,6 +101,11 @@ const AddService = () => {
             inputMode="numeric"
             setValue={setPrice}
             value={price.toString()}
+          />
+          <CustomInput
+            placeholderText="Image Url"
+            setValue={setServiceImage}
+            value={serviceImage}
           />
           <CustomInput
             placeholderText="Comma Separated Tags"
