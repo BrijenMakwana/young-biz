@@ -1,11 +1,14 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const CurrentLocationFAB = () => {
   return (
-    <View style={styles.container}>
-      <MaterialIcons name="my-location" size={25} color="black" />
-    </View>
+    <Pressable style={styles.container}>
+      <View style={styles.btn}>
+        <MaterialIcons name="my-location" size={25} color="black" />
+      </View>
+      <View style={styles.shadow} />
+    </Pressable>
   );
 };
 
@@ -13,17 +16,30 @@ export default CurrentLocationFAB;
 
 const styles = StyleSheet.create({
   container: {
+    height: 50,
+    width: 50,
     position: "absolute",
-    padding: 10,
+    bottom: 40,
+    right: 40,
+  },
+  btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10,
+    width: "100%",
+    height: "100%",
+    borderWidth: 2,
+    borderRadius: 100,
     backgroundColor: "#83A2FF",
-    borderRadius: 30,
-    bottom: 90,
-    right: 25,
-    shadowColor: "#000",
-    shadowOffset: {
-      height: 5,
-      width: 5,
-    },
-    elevation: 10,
+  },
+  shadow: {
+    width: "100%",
+    height: "100%",
+    zIndex: 0,
+    backgroundColor: "#000",
+    position: "absolute",
+    top: 3,
+    left: 3,
+    borderRadius: 100,
   },
 });
