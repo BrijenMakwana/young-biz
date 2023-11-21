@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { db, doc, getDoc } from "../../firebase/firebase";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/CustomButton";
+import DisplayLocation from "../../components/DisplayLocation";
 
 const ServiceScreen = () => {
   const {
@@ -118,7 +119,7 @@ const ServiceScreen = () => {
 
       <Text style={styles.text}>{seller?.bio}</Text>
 
-      <Text style={styles.text}>Lives at {seller?.address}</Text>
+      {seller?.location && <DisplayLocation location={seller?.location} />}
 
       <CustomButton
         text="call"

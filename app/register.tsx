@@ -49,7 +49,6 @@ const Register = () => {
         fullName,
         email,
         bio,
-        address,
         phone,
         location: {
           latitude: mapRegion.latitude,
