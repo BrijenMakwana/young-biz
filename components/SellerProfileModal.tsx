@@ -10,9 +10,10 @@ import CustomButton from "./CustomButton";
 import { auth, signOut } from "../firebase/firebase";
 import { router } from "expo-router";
 import { useState } from "react";
+import DisplayLocation from "./DisplayLocation";
 
 const SellerProfileModal = (props) => {
-  const { isOpen, onClose, fullName, email, bio, address, phone } = props;
+  const { isOpen, onClose, fullName, email, bio, location, phone } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,13 +41,11 @@ const SellerProfileModal = (props) => {
 
         <Text style={styles.text}>{bio}</Text>
 
-        <Text style={styles.heading}>Address</Text>
-
-        <Text style={styles.text}>{address}</Text>
-
         <Text style={styles.heading}>guardian phone number</Text>
 
         <Text style={styles.text}>{phone}</Text>
+
+        {location && <DisplayLocation location={location} />}
 
         <View
           style={{
@@ -80,6 +79,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderWidth: 2,
+    gap: 15,
   },
   username: {
     fontSize: 30,
@@ -90,16 +90,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Neo",
     color: "#fff",
-    marginTop: 5,
   },
   heading: {
     fontSize: 13,
     fontFamily: "Neo",
     textTransform: "uppercase",
-    marginTop: 20,
   },
   text: {
     fontSize: 15,
-    marginTop: 10,
   },
 });
