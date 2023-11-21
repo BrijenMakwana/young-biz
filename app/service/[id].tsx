@@ -13,6 +13,44 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/CustomButton";
 import DisplayLocation from "../../components/DisplayLocation";
 
+const BuyingMode = (props) => {
+  const { text } = props;
+
+  const texts = {
+    delivery: "delivery ony",
+    pickup: "pickup only",
+    both: "delivery / pickup",
+  };
+
+  const images = {
+    delivery: require("../../assets/images/delivery.png"),
+    pickup: require("../../assets/images/pickup.png"),
+    both: require("../../assets/images/both.png"),
+  };
+
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
+      <Image
+        source={images[text]}
+        style={{
+          width: 35,
+          height: 35,
+        }}
+      />
+
+      <Text
+        style={{
+          fontSize: 11,
+          fontFamily: "Neo",
+          textTransform: "uppercase",
+        }}
+      >
+        {texts[text]}
+      </Text>
+    </View>
+  );
+};
+
 const ServiceScreen = () => {
   const {
     id,
@@ -100,6 +138,8 @@ const ServiceScreen = () => {
           </Text>
         ))}
       </View>
+
+      {service?.buyingMode && <BuyingMode text={service?.buyingMode} />}
 
       <View
         style={{
