@@ -31,7 +31,7 @@ const MapModal = (props) => {
           onRegionChange={changeMapRegion}
           style={styles.map}
         >
-          <Marker coordinate={mapRegion} />
+          <Marker coordinate={mapRegion} pinColor="#83A2FF" />
         </MapView>
       </View>
 

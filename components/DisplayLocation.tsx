@@ -14,7 +14,7 @@ const DisplayLocation = (props) => {
       provider="google"
       style={styles.map}
     >
-      <Marker coordinate={location} />
+      <Marker coordinate={location} pinColor="#83A2FF" />
     </MapView>
   );
 };
