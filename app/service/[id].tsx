@@ -12,6 +12,7 @@ import { db, doc, getDoc } from "../../firebase/firebase";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/CustomButton";
 import DisplayLocation from "../../components/DisplayLocation";
+import PlaceOrderModal from "../../components/PlaceOrderModal";
 
 const BuyingMode = (props) => {
   const { text } = props;
@@ -60,6 +61,8 @@ const ServiceScreen = () => {
 
   const [service, setService] = useState({});
   const [seller, setSeller] = useState({});
+
+  const [orderModalIsOpen, setOrderModalIsOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -166,6 +169,19 @@ const ServiceScreen = () => {
         backgroundColor="#83A2FF"
         onPress={callSeller}
       />
+      <CustomButton
+        text="order"
+        backgroundColor="#83A2FF"
+        onPress={() => setOrderModalIsOpen(true)}
+      />
+
+      <PlaceOrderModal
+        isOpen={orderModalIsOpen}
+        onClose={() => setOrderModalIsOpen(false)}
+        userID={service?.userID}
+        serviceName={service?.title}
+        servicePrice={service?.price}
+      />
     </ScrollView>
   );
 };
@@ -175,7 +191,7 @@ export default ServiceScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    paddingTop: 40,
+    // paddingTop: 40,
     paddingHorizontal: 15,
     gap: 20,
     paddingBottom: 50,
