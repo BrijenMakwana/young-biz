@@ -60,7 +60,6 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="role" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
   );

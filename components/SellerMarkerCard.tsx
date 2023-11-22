@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#fff",
     gap: 10,
+    alignItems: "center",
   },
   fullName: {
     fontSize: 17,
@@ -33,5 +34,6 @@ const styles = StyleSheet.create({
   bio: {
     fontSize: 13,
     color: "#000",
+    width: 200,
   },
 });

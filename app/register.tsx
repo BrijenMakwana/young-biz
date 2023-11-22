@@ -23,8 +23,8 @@ import { Fontisto } from "@expo/vector-icons";
 import DisplayLocation from "../components/DisplayLocation";
 
 const initialRegion = {
-  latitude: 12.9716,
-  longitude: 77.5946,
+  latitude: 22.28706,
+  longitude: 73.12825,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
