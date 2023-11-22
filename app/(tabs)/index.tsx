@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { db, getDocs, collection } from "../../firebase/firebase";
 import ServiceCard from "../../components/ServiceCard";
 import MapViewFAB from "../../components/MapViewFAB";
+import * as Location from "expo-location";
 
 export default function BuyerScreen() {
   const [services, setServices] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [locationIsSet, setLocationIsSet] = useState(false);
 
   const getServices = async () => {
     setIsLoading(true);
@@ -26,7 +29,25 @@ export default function BuyerScreen() {
     }
   };
 
+  const getCurrentLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== "granted") {
+      alert("Permission to access location was denied");
+      return;
+    }
+
+    try {
+      await Location.getCurrentPositionAsync({});
+
+      setLocationIsSet(true);
+    } catch (error) {
+      alert("Error getting location");
+    }
+  };
+
   useEffect(() => {
+    getCurrentLocation();
     getServices();
   }, []);
 
@@ -35,25 +56,27 @@ export default function BuyerScreen() {
       <View style={styles.container}>
         <Text style={styles.heading}>around you!</Text>
 
-        <FlatList
-          data={services}
-          renderItem={({ item }) => <ServiceCard {...item} forBuyer />}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{
-            gap: 20,
-            paddingBottom: 140,
-            paddingHorizontal: 15,
-            marginTop: 20,
-          }}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={isLoading}
-              colors={["#83A2FF"]}
-              onRefresh={getServices}
-            />
-          }
-        />
+        {locationIsSet && (
+          <FlatList
+            data={services}
+            renderItem={({ item }) => <ServiceCard {...item} forBuyer />}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{
+              gap: 20,
+              paddingBottom: 140,
+              paddingHorizontal: 15,
+              marginTop: 20,
+            }}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoading}
+                colors={["#83A2FF"]}
+                onRefresh={getServices}
+              />
+            }
+          />
+        )}
       </View>
 
       <MapViewFAB />

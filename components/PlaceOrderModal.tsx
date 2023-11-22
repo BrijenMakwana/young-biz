@@ -37,7 +37,7 @@ const PlaceOrderModal = (props) => {
         quantity,
         userID,
         totalAmount: Number(quantity) * servicePrice,
-        date: new Date(),
+        date: new Date().toString(),
         deliveryTime,
       });
 
