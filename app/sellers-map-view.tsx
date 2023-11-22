@@ -5,8 +5,8 @@ import { db, getDocs, collection } from "../firebase/firebase";
 import SellerMarkerCard from "../components/SellerMarkerCard";
 
 const initialRegion = {
-  latitude: 12.9716,
-  longitude: 77.5946,
+  latitude: 22.2613703,
+  longitude: 73.1368718,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
