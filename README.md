@@ -23,7 +23,7 @@
 
 ## Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 <img src="https://i.imgur.com/RLZQHRO.jpg" alt="screenshot 1" width="250"/>
 <img src="https://i.imgur.com/4OZsO9i.jpg" alt="screenshot 2" width="250"/>
 <img src="https://i.imgur.com/9JcLFyg.jpg" alt="screenshot 3" width="250"/>
