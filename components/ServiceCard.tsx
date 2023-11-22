@@ -77,11 +77,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 10,
   },
   title: {
     fontSize: 17,
     fontFamily: "Neo",
     textTransform: "capitalize",
+    flex: 1,
   },
   price: {
     fontSize: 17,

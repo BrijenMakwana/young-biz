@@ -137,7 +137,7 @@ const AddService = () => {
           </RadioButton.Group>
 
           <CustomInput
-            placeholderText="Delivery Time"
+            placeholderText="Delivery Time in Days"
             inputMode="numeric"
             setValue={setDeliveryTime}
             value={deliveryTime.toString()}
