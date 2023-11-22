@@ -12,6 +12,7 @@ import { db, doc, getDoc } from "../../firebase/firebase";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/CustomButton";
 import DisplayLocation from "../../components/DisplayLocation";
+import PlaceOrderModal from "../../components/PlaceOrderModal";
 
 const BuyingMode = (props) => {
   const { text } = props;
@@ -60,6 +61,8 @@ const ServiceScreen = () => {
 
   const [service, setService] = useState({});
   const [seller, setSeller] = useState({});
+
+  const [orderModalIsOpen, setOrderModalIsOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -139,6 +142,14 @@ const ServiceScreen = () => {
         ))}
       </View>
 
+      <Text style={styles.description}>
+        Order will Fulfill in{" "}
+        <Text style={{ fontFamily: "Neo", color: "#83A2FF", fontSize: 17 }}>
+          {service?.deliveryTime}
+        </Text>{" "}
+        Days
+      </Text>
+
       {service?.buyingMode && <BuyingMode text={service?.buyingMode} />}
 
       <View
@@ -165,6 +176,20 @@ const ServiceScreen = () => {
         text="call"
         backgroundColor="#83A2FF"
         onPress={callSeller}
+      />
+      <CustomButton
+        text="order"
+        backgroundColor="#83A2FF"
+        onPress={() => setOrderModalIsOpen(true)}
+      />
+
+      <PlaceOrderModal
+        isOpen={orderModalIsOpen}
+        onClose={() => setOrderModalIsOpen(false)}
+        userID={service?.userID}
+        serviceName={service?.title}
+        servicePrice={service?.price}
+        deliveryTime={service?.deliveryTime}
       />
     </ScrollView>
   );
