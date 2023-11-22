@@ -27,6 +27,7 @@ const AddService = () => {
   const [tags, setTags] = useState("");
   const [buyingMode, setBuyingMode] = useState("pickup");
   const [serviceImage, setServiceImage] = useState("");
+  const [deliveryTime, setDeliveryTime] = useState("");
 
   const [location, setLocation] = useState({});
 
@@ -62,6 +63,7 @@ const AddService = () => {
         image: serviceImage,
         tags: tags.split(","),
         buyingMode: buyingMode,
+        deliveryTime: deliveryTime,
         userID: auth.currentUser?.uid,
         location: location,
       });
@@ -81,6 +83,7 @@ const AddService = () => {
       <ScrollView
         contentContainerStyle={styles.container}
         style={{ flex: 1, backgroundColor: "#fff" }}
+        showsVerticalScrollIndicator={false}
       >
         <Text style={styles.heading}>add service</Text>
 
@@ -132,6 +135,13 @@ const AddService = () => {
               </View>
             </View>
           </RadioButton.Group>
+
+          <CustomInput
+            placeholderText="Delivery Time"
+            inputMode="numeric"
+            setValue={setDeliveryTime}
+            value={deliveryTime.toString()}
+          />
         </View>
       </ScrollView>
 
