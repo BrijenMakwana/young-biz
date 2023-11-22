@@ -142,6 +142,14 @@ const ServiceScreen = () => {
         ))}
       </View>
 
+      <Text style={styles.description}>
+        Order will Fulfill in{" "}
+        <Text style={{ fontFamily: "Neo", color: "#83A2FF", fontSize: 17 }}>
+          {service?.deliveryTime}
+        </Text>{" "}
+        Days
+      </Text>
+
       {service?.buyingMode && <BuyingMode text={service?.buyingMode} />}
 
       <View
@@ -181,6 +189,7 @@ const ServiceScreen = () => {
         userID={service?.userID}
         serviceName={service?.title}
         servicePrice={service?.price}
+        deliveryTime={service?.deliveryTime}
       />
     </ScrollView>
   );
@@ -191,7 +200,7 @@ export default ServiceScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    // paddingTop: 40,
+    paddingTop: 40,
     paddingHorizontal: 15,
     gap: 20,
     paddingBottom: 50,

@@ -13,7 +13,8 @@ import CustomButton from "./CustomButton";
 import { db, addDoc, collection } from "../firebase/firebase";
 
 const PlaceOrderModal = (props) => {
-  const { isOpen, onClose, userID, serviceName, servicePrice } = props;
+  const { isOpen, onClose, userID, serviceName, servicePrice, deliveryTime } =
+    props;
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,6 +36,9 @@ const PlaceOrderModal = (props) => {
         serviceName,
         quantity,
         userID,
+        totalAmount: Number(quantity) * servicePrice,
+        date: new Date(),
+        deliveryTime,
       });
 
       ToastAndroid.show("Order placed successfully!", ToastAndroid.LONG);
