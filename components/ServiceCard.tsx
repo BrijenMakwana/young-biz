@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { router } from "expo-router";
+import BrutalismShadow from "./BrutalismShadow";
 
 const ServiceCard = (props) => {
   const {
@@ -50,7 +51,7 @@ const ServiceCard = (props) => {
         </View>
       </View>
 
-      <View style={styles.shadow} />
+      <BrutalismShadow />
     </Pressable>
   );
 };
@@ -108,15 +109,5 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     textTransform: "lowercase",
     borderWidth: 1,
-  },
-  shadow: {
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    backgroundColor: "#000",
-    position: "absolute",
-    borderRadius: 10,
-    top: 4,
-    left: 4,
   },
 });

@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { router } from "expo-router";
+import BrutalismShadow from "./BrutalismShadow";
 
 const FAB = () => {
   return (
@@ -11,7 +12,8 @@ const FAB = () => {
       <View style={styles.btn}>
         <Entypo name="plus" size={35} color="#000" />
       </View>
-      <View style={styles.shadow} />
+
+      <BrutalismShadow borderRadius={100} />
     </Pressable>
   );
 };
@@ -35,15 +37,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
     backgroundColor: "#83A2FF",
-  },
-  shadow: {
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    backgroundColor: "#000",
-    position: "absolute",
-    top: 3,
-    left: 3,
-    borderRadius: 100,
   },
 });
