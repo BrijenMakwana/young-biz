@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import BrutalismShadow from "./BrutalismShadow";
 
 const CustomButton = (props) => {
   const { text, backgroundColor, onPress } = props;
@@ -16,7 +16,7 @@ const CustomButton = (props) => {
       >
         <Text style={styles.text}>{text}</Text>
       </View>
-      <View style={styles.shadow} />
+      <BrutalismShadow />
     </Pressable>
   );
 };
@@ -31,25 +31,15 @@ const styles = StyleSheet.create({
   btn: {
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 10,
+    zIndex: 1,
     width: "100%",
     height: "100%",
     borderWidth: 2,
-    borderRadius: 7,
+    borderRadius: 10,
   },
   text: {
     fontSize: 24,
     textTransform: "uppercase",
     fontFamily: "Neo",
-  },
-  shadow: {
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    backgroundColor: "#000",
-    position: "absolute",
-    bottom: -7,
-    left: 7,
-    borderRadius: 7,
   },
 });

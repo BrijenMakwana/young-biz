@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput, View } from "react-native";
-import React from "react";
+import BrutalismShadow from "./BrutalismShadow";
 
 const CustomInput = (props) => {
   const {
@@ -23,7 +23,7 @@ const CustomInput = (props) => {
         value={value}
       />
 
-      <View style={styles.shadow} />
+      <BrutalismShadow />
     </View>
   );
 };
@@ -38,18 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 12,
     borderWidth: 2,
-    borderRadius: 7,
+    borderRadius: 10,
     zIndex: 10,
     fontFamily: "Neo",
-  },
-  shadow: {
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    backgroundColor: "#000",
-    position: "absolute",
-    bottom: -7,
-    left: 7,
-    borderRadius: 7,
   },
 });

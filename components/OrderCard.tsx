@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import moment from "moment";
+import BrutalismShadow from "./BrutalismShadow";
 
 const OrdersCard = (props) => {
   const {
@@ -52,7 +53,7 @@ const OrdersCard = (props) => {
         <Text style={styles.date}>Ordered on {moment(date).format("ll")}</Text>
       </View>
 
-      <View style={styles.shadow} />
+      <BrutalismShadow />
     </View>
   );
 };
@@ -89,15 +90,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: "Neo",
     alignSelf: "flex-end",
-  },
-  shadow: {
-    width: "100%",
-    height: "100%",
-    zIndex: 0,
-    backgroundColor: "#000",
-    position: "absolute",
-    borderRadius: 10,
-    top: 4,
-    left: 4,
   },
 });
