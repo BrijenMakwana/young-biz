@@ -66,6 +66,7 @@ const AddService = () => {
         deliveryTime: deliveryTime,
         userID: auth.currentUser?.uid,
         location: location,
+        comments: [],
       });
 
       ToastAndroid.show("Service Added successfully!", ToastAndroid.SHORT);

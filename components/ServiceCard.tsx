@@ -1,7 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { router } from "expo-router";
 import BrutalismShadow from "./BrutalismShadow";
+import { FontAwesome } from "@expo/vector-icons";
+import CommentsModal from "./CommentsModal";
 
 const ServiceCard = (props) => {
   const {
@@ -12,7 +14,10 @@ const ServiceCard = (props) => {
     image,
     tags,
     forBuyer = false,
+    comments,
   } = props;
+
+  const [commentModalIsOpen, setCommentModalIsOpen] = useState(false);
 
   const goToServiceScreen = () => {
     router.push(`/service/${id}`);
@@ -49,9 +54,24 @@ const ServiceCard = (props) => {
             </Text>
           ))}
         </View>
+
+        <Pressable
+          style={styles.addComment}
+          onPress={() => setCommentModalIsOpen(true)}
+        >
+          <FontAwesome name="comment" size={20} color="#83A2FF" />
+          <Text style={styles.commentText}>comments</Text>
+        </Pressable>
       </View>
 
       <BrutalismShadow />
+
+      <CommentsModal
+        isOpen={commentModalIsOpen}
+        onClose={() => setCommentModalIsOpen(false)}
+        serviceID={id}
+        comments={comments}
+      />
     </Pressable>
   );
 };
@@ -60,7 +80,7 @@ export default ServiceCard;
 
 const styles = StyleSheet.create({
   container: {
-    gap: 10,
+    gap: 15,
     padding: 10,
     borderWidth: 2,
     borderRadius: 10,
@@ -109,5 +129,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     textTransform: "lowercase",
     borderWidth: 1,
+  },
+  addComment: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  commentText: {
+    fontSize: 12,
+    textTransform: "capitalize",
+    fontFamily: "Neo",
   },
 });

@@ -16,6 +16,8 @@ import {
   deleteDoc,
   query,
   where,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -48,4 +50,6 @@ export {
   deleteDoc,
   query,
   where,
+  updateDoc,
+  arrayUnion,
 };
