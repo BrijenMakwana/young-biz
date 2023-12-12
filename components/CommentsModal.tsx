@@ -47,7 +47,7 @@ const AddCommentBtn = (props) => {
 };
 
 const CommentsModal = (props) => {
-  const { serviceID, isOpen, onClose, comments } = props;
+  const { serviceID, isOpen, onClose, comments, isSeller } = props;
 
   const [comment, setComment] = useState("");
 
@@ -62,6 +62,7 @@ const CommentsModal = (props) => {
       id: nanoid(),
       comment: comment,
       date: new Date().toISOString(),
+      isSeller: isSeller,
     };
 
     try {

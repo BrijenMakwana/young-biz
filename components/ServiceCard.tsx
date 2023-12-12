@@ -71,6 +71,7 @@ const ServiceCard = (props) => {
         onClose={() => setCommentModalIsOpen(false)}
         serviceID={id}
         comments={comments}
+        isSeller={!forBuyer}
       />
     </Pressable>
   );
