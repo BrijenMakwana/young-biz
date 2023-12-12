@@ -59,7 +59,7 @@ const ServiceCard = (props) => {
           style={styles.addComment}
           onPress={() => setCommentModalIsOpen(true)}
         >
-          <FontAwesome name="comment" size={20} color="#83A2FF" />
+          <FontAwesome name="comment" size={18} color="#83A2FF" />
           <Text style={styles.commentText}>comments</Text>
         </Pressable>
       </View>
@@ -133,8 +133,9 @@ const styles = StyleSheet.create({
   addComment: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     gap: 10,
+    alignSelf: "flex-end",
   },
   commentText: {
     fontSize: 12,
