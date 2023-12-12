@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import CustomInput from "./CustomInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, doc, updateDoc, arrayUnion } from "../firebase/firebase";
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
@@ -47,35 +47,35 @@ const AddCommentBtn = (props) => {
 };
 
 const CommentsModal = (props) => {
-  const { serviceID, isOpen, onClose, comments } = props;
+  const { serviceID, isOpen, onClose, comments, isSeller } = props;
 
   const [comment, setComment] = useState("");
+  const [localComments, setLocalComments] = useState<any[]>([]);
 
-  const [isCommenting, setIsCommenting] = useState(false);
+  useEffect(() => {
+    setLocalComments(comments);
+  }, [comments]);
 
   const addCommentToService = async () => {
-    setIsCommenting(true);
-
-    const docRef = doc(db, "services", serviceID);
-
     const commentObj = {
       id: nanoid(),
       comment: comment,
       date: new Date().toISOString(),
+      isSeller: isSeller,
     };
 
+    setLocalComments([...localComments, commentObj]);
+
+    setComment("");
+
     try {
-      setComment("");
+      const docRef = doc(db, "services", serviceID);
 
       await updateDoc(docRef, {
         comments: arrayUnion(commentObj),
       });
-
-      console.log("Document successfully updated with comment: ");
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsCommenting(false);
     }
   };
 
@@ -83,7 +83,7 @@ const CommentsModal = (props) => {
     <Modal animationType="slide" visible={isOpen} onRequestClose={onClose}>
       <View style={styles.container}>
         <FlatList
-          data={comments}
+          data={localComments}
           renderItem={({ item }) => <Comment {...item} />}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
@@ -106,18 +106,12 @@ const CommentsModal = (props) => {
           paddingHorizontal: 20,
         }}
       >
-        {isCommenting ? (
-          <ActivityIndicator size="large" color="#83A2FF" />
-        ) : (
-          <>
-            <CustomInput
-              placeholderText="Add Comment"
-              setValue={setComment}
-              value={comment}
-            />
-            <AddCommentBtn onPress={addCommentToService} />
-          </>
-        )}
+        <CustomInput
+          placeholderText="Add Comment"
+          setValue={setComment}
+          value={comment}
+        />
+        <AddCommentBtn onPress={addCommentToService} />
       </View>
     </Modal>
   );
